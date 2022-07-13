@@ -16,6 +16,16 @@ class EncadreursController{
 		}
         
 	}
+
+	//find encadreur
+	public function findEncadreurs(){
+		if (isset($_POST['search'])) {
+		  $data = array('search' => $_POST['search']);
+		}
+
+		$encadreur = Encadreur::searchEncadreur($data);
+		return $encadreur;
+	}
 //Add function
 	public function addEncadreur(){
 		if (isset($_POST['submit'])) {
@@ -33,6 +43,7 @@ class EncadreursController{
 			
 			$result = Encadreur::add($data);
 			if ($result === 'ok') {
+					Session::set('success', 'Encadreur ajouter avec succès!');
 				Redirect::to('Homme');
 			}else{
 				echo $result;
@@ -58,6 +69,7 @@ class EncadreursController{
 			
 			$result = Encadreur::update($data);
 			if ($result === 'ok') {
+					Session::set('success', 'Encadreur modifier avec succès!');
 				Redirect::to('Homme');
 			}else{
 				echo $result;
@@ -72,6 +84,7 @@ class EncadreursController{
 			$data['id_encadreurs'] = $_POST['id_encadreurs'];
 			$result = Encadreur::delete($data);
 			if ($result === 'ok') {
+					Session::set('success', 'Suppresionn effectuer avec succès!');
 				Redirect::to('Homme');
 			}else{
 				echo $result;

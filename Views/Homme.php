@@ -29,15 +29,22 @@ $sel = DB::connect()->prepare("SELECT * FROM encadreurs order by id_encadreurs D
 $sel ->setFetchMode(PDO::FETCH_ASSOC);
 $sel ->execute();
 $tab = $sel->fetchAll();
+if (isset($_POST['find'])) {
+    $data = new EncadreursController();
+    $encadreurs = $data->findEncadreurs();
 
+}    else{
+        
 $data = new EncadreursController();
 $encadreurs = $data -> getAllEncadreurs();
+    }
 ?>
 
 <section>
   <div class="container">
     <div class="row">
         <div class="col-md-12 mx-auto ">
+            <?php include('./Views/Includes/Alerts.php'); ?>
           <div class="card">
           <div class="card-header">
                 <h3>Liste des Encadreurs</h3>
@@ -46,6 +53,18 @@ $encadreurs = $data -> getAllEncadreurs();
               <a href="<?php echo BASE_URL ;?>Add " class="btn btn-sm btn-primary mr-2 mb-2">
             <i class="fa fa-plus"></i>
             </a>
+                   <a href="<?php echo BASE_URL ;?> " class="btn btn-sm btn-secondary mr-2 mb-2">
+            <i class="fa fa-home"></i>
+            </a>
+              </a>
+                   <a href="<?php echo BASE_URL ;?> logout" title="Déconnexion" class="btn btn-link">
+            <i class="fa fa-user mr-2">href="<?php echo 'login' ;?> </i>
+            </a>
+            <form method="post" class="float-right mb-2 d-flex flex-row">
+                <input type="text" class="" name="search" placeholder="Search" >
+                <button class="btn btn-info btn-sm" name="find" type="submit">
+                    <i class="fa fa-search"></i> </button>
+            </form>
             <div><?php echo $tcount[0]["nbr_encadreur"]; ?> Enregistrements au Total</div>
 
                   <table class="table table-hover table-bordered">

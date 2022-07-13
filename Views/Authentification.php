@@ -5,6 +5,10 @@ require_once './Database/db.php';
 ?>
 
 <?php 
+if (isset($_POST['login'])) {
+  $loginUser = new UsersController();
+   $loginUser -> auth();
+}
 
 
 if (isset($_POST['register'])) {
@@ -26,7 +30,7 @@ if (isset($_POST['register'])) {
 <body>
   <div class="full-page">
 
-
+     <?php include('./Views/Includes/Alerts.php'); ?>
 
   		<div class="form-box">
 
@@ -36,19 +40,17 @@ if (isset($_POST['register'])) {
   					
   			 </div>
 
-  				<form  id="login" class="input-group-login">
+  				<form method="post"  id="login" class="input-group-login">
 
-  					<input type="text" name="email" class="input-field" placeholder="Email Id" required>
-
-  					<input type="password" name="password_" class="input-field" placeholder="Enter Password" required>
+              <input type="text" name="login" class="input-field" placeholder="Login" required>
+  					<input type="password" name="password_" class="input-field" placeholder=" Password" required>
   					<input type="checkbox" name="password_remember" class="check-box" >
             <span style="font-weight:bold; color: black;">Remember Password</span>
             <button name="login" type="submit" class="submit-btn">Log In</button> 					
   				</form>
 
   				<form method="post"  id="register" class="input-group-register">
-  						<input type="text" name="nom" class="input-field" placeholder="First Name" required>
-  						<input type="text" name="prenom" class="input-field" placeholder="Last Name" required>
+  						<input type="text" name="fullname" class="input-field" placeholder="FullName" required>
   						<input type="text" name="login" class="input-field" placeholder="Enter Login" required>
   						<input type="password" name="password" class="input-field" placeholder="Enter Password" required>
   						<input type="checkbox" name="" class="check-box" >
@@ -59,8 +61,6 @@ if (isset($_POST['register'])) {
   		
   			
   		</div>
-  		
-  
   	
   </div>
 

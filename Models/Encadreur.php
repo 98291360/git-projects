@@ -96,4 +96,18 @@ static public function add($data){
 
 	}
 
+	static public function searchEncadreur($data){
+		$search = $data['search'];
+			try {
+		$query = ('SELECT * FROM encadreurs where matricule LIKE ? OR nom LIKE ? OR prenom LIKE ? OR adresse LIKE ? OR date_debut LIKE ? OR salaire LIKE ? OR centre LIKE ? OR statut LIKE ?');
+			$stmt = DB::connect()->prepare($query);
+			$stmt->execute(array('%'.$search.'%', '%'.$search.'%', '%'.$search.'%', '%'.$search.'%', '%'.$search.'%', '%'.$search.'%', '%'.$search.'%', '%'.$search.'%'));
+		 $encadreur =$stmt-> fetchAll();
+		 return $encadreur;
+	} catch (PDOException $ex) {
+         echo 'error' . $ex->getMessage();
+		
+	}
+	}
+
 }
